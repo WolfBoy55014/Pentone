@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8fsx4xh7pxjw"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_8161c"]
-[ext_resource type="Script" path="res://Label.gd" id="2_axua4"]
+[ext_resource type="Script" path="res://fps.gd" id="2_axua4"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_mi8uw"]
 buffer_length = 0.1
