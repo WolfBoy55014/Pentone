@@ -32,8 +32,7 @@ func _process(delta):
 # Called for every input event. 'event' contains event data
 func _input(event):
 	if event is InputEventMouseMotion:
-		if event.pressure >= 0.2:
-			update_tone(event) # Only update the tone when the mouse is pressed
+		update_tone(event) # Update the generated tone
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit() # Stop game
 
@@ -45,7 +44,8 @@ func update_tone(event):
 	
 	# Remap the mouse position to a pitch and amplitude range
 	frequency = remap(mouse_x, 0, get_viewport().size.x, 10, 1000)
-	amplitude = remap(mouse_y, get_viewport().size.y, 0, 0.0, 1.0)
+	# Remap the mouse pressure to 0 and max volume
+	amplitude = remap(mouse_pressure, 0, 1, 0, 5)
 
 func fill_buffer():
 	var increment = frequency / sample_hz
