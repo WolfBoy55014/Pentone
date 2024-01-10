@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct2mf51il67r0"]
+
+[ext_resource type="PackedScene" uid="uid://b8fsx4xh7pxjw" path="res://scenes/tone_space.tscn" id="1_8twiw"]
+
+[sub_resource type="Gradient" id="Gradient_lpy7x"]
+colors = PackedColorArray(0.639216, 0.745098, 0.54902, 1, 0.262745, 0.298039, 0.368627, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n13vl"]
+gradient = SubResource("Gradient_lpy7x")
+fill = 1
+
+[node name="Root" type="Node"]
+
+[node name="Tone Space" parent="." instance=ExtResource("1_8twiw")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_n13vl")

@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8fsx4xh7pxjw"]
+
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_0m6nh"]
+[ext_resource type="FontFile" uid="uid://bqefgg7bl7cb8" path="res://fonts/Ubuntu/Ubuntu-Regular.ttf" id="2_wnaxw"]
+[ext_resource type="Script" path="res://scripts/fps.gd" id="3_60j6w"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_mi8uw"]
+buffer_length = 0.1
+
+[sub_resource type="LabelSettings" id="LabelSettings_6guuw"]
+font = ExtResource("2_wnaxw")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_4d334"]
+font = ExtResource("2_wnaxw")
+font_size = 18
+
+[node name="Tone Space" type="Node2D"]
+script = ExtResource("1_0m6nh")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamGenerator_mi8uw")
+volume_db = 5.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 95.0
+offset_bottom = 95.0
+
+[node name="FPS" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_6guuw")
+script = ExtResource("3_60j6w")
+
+[node name="Quit" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "[Q] to Quit"
+label_settings = SubResource("LabelSettings_4d334")
