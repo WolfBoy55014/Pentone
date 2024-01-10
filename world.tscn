@@ -1,29 +1,57 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8fsx4xh7pxjw"]
+[gd_scene load_steps=9 format=3 uid="uid://b8fsx4xh7pxjw"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_8161c"]
+[ext_resource type="FontFile" uid="uid://bqefgg7bl7cb8" path="res://fonts/Ubuntu/Ubuntu-Regular.ttf" id="2_5gv3e"]
 [ext_resource type="Script" path="res://fps.gd" id="2_axua4"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_mi8uw"]
 buffer_length = 0.1
 
-[node name="World" type="Node2D"]
+[sub_resource type="Gradient" id="Gradient_lpy7x"]
+colors = PackedColorArray(0.639216, 0.745098, 0.54902, 1, 0.262745, 0.298039, 0.368627, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mxjrj"]
+gradient = SubResource("Gradient_lpy7x")
+fill = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_rkebr"]
+font = ExtResource("2_5gv3e")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_daaao"]
+font = ExtResource("2_5gv3e")
+font_size = 18
+
+[node name="Tone Space" type="Node2D"]
 script = ExtResource("1_8161c")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamGenerator_mi8uw")
 volume_db = 5.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-z_index = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_mxjrj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+z_index = 2
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 95.0
 offset_bottom = 95.0
 
-[node name="FPS" type="Label" parent="VBoxContainer"]
+[node name="FPS" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_rkebr")
 script = ExtResource("2_axua4")
 
-[node name="Quit" type="Label" parent="VBoxContainer"]
+[node name="Quit" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "[Q] to Quit"
+label_settings = SubResource("LabelSettings_daaao")
