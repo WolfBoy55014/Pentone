@@ -41,11 +41,18 @@ func update_tone(event):
 	mouse_pressure = event.pressure
 	mouse_x = event.position.x
 	mouse_y = event.position.y
+	var pendown = null
+	
+	# Check to see if the pen is down.
+	if mouse_pressure > 0: 
+		pendown = 1
+	else:
+		pendown = 0
 	
 	# Remap the mouse position to a pitch and amplitude range
 	frequency = remap(mouse_x, 0, get_viewport().size.x, 10, 1000)
-	# Remap the mouse pressure to 0 and max volume
-	amplitude = remap(mouse_pressure, 0, 1, 0, 5)
+	# Remap the mouse y to 0 and max volume
+	amplitude = remap(mouse_y, 0, get_viewport().size.y, 5, 0) * pendown
 
 func fill_buffer():
 	var increment = frequency / sample_hz
