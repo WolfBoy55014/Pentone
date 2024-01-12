@@ -7,6 +7,8 @@ var frequency = 0.0
 var amplitude = 0.0
 var phase = 0.0
 
+var string_length # Functions as 'string length' in frequency curve remap equation
+
 # Contians the sound waves
 var playback: AudioStreamPlayback = null
 
@@ -44,8 +46,14 @@ func update_tone(event):
 	
 	var mouse_pressed = ceili(mouse_pressure) # If pressure > 0, then 1
 	
-	# Remap the mouse position to a pitch and amplitude range
-	frequency = remap(mouse_x, 0, get_viewport().size.x, 10, 1000)
+	# Remap mouse x to virtual string length
+	string_length = remap(mouse_x, 0, get_viewport().size.x, 100, 21.0225)
+	#  IMPORTANT: string length of 100 = A2, 21.0225 = C5. These values should not be changed without
+	#  first checking the Mersenne curve (see equation below).
+	
+	# string_length integrated into Mersenne's Law for realistic frequency spacing
+	frequency = 27.5 * (800 / (2 * string_length))
+	
 	# Remap the mouse y to 0 and max volume
 	amplitude = remap(mouse_y, 0, get_viewport().size.y, 5, 0) * mouse_pressed
 
