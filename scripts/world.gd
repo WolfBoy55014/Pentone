@@ -16,6 +16,7 @@ var playback: AudioStreamPlayback = null
 var mouse_pressure
 var mouse_x
 var mouse_y
+var mouse_pressed
 
 
 # Called when the node enters the scene tree for the first time.
@@ -44,7 +45,7 @@ func update_tone(event):
 	mouse_x = event.position.x
 	mouse_y = event.position.y
 	
-	var mouse_pressed = ceili(mouse_pressure) # If pressure > 0, then 1
+	mouse_pressed = ceili(mouse_pressure) # If pressure > 0, then 1
 	
 	# Remap mouse x to virtual string length
 	string_length = remap(mouse_x, 0, get_viewport().size.x, 100, 21.0225)
