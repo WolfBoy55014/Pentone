@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://b8fsx4xh7pxjw"]
 
-[ext_resource type="Script" path="res://scripts/world.gd" id="1_0m6nh"]
+[ext_resource type="Script" path="res://scripts/tone_space.gd" id="1_7vdbb"]
 [ext_resource type="FontFile" uid="uid://bqefgg7bl7cb8" path="res://fonts/Ubuntu/Ubuntu-Regular.ttf" id="2_wnaxw"]
 [ext_resource type="Script" path="res://scripts/fps.gd" id="3_60j6w"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_mi8uw"]
-buffer_length = 0.1
+buffer_length = 0.02
 
 [sub_resource type="LabelSettings" id="LabelSettings_6guuw"]
 font = ExtResource("2_wnaxw")
@@ -16,7 +16,7 @@ font = ExtResource("2_wnaxw")
 font_size = 18
 
 [node name="Tone Space" type="Node2D"]
-script = ExtResource("1_0m6nh")
+script = ExtResource("1_7vdbb")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamGenerator_mi8uw")

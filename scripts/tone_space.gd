@@ -1,38 +1,37 @@
 extends Node2D
 
+#region Variables
+var thread1
+var stopping
+
 @onready var sample_hz = $AudioStreamPlayer.stream.mix_rate # Retrieve sample rate from AudioStreamPlayer node
 
-# The frequency, amplitude, and phase of the sound wave
+# Variables containing tone properties
 var frequency = 0.0
 var amplitude = 0.0
 var phase = 0.0
-
 var string_length # Functions as 'string length' in frequency curve remap equation
 
 # Contians the sound waves
 var playback: AudioStreamPlayback = null
 
-# Info about the mouse
+# Variables containing mouse state
 var mouse_pressure
 var mouse_x
 var mouse_y
 var mouse_pressed
-
+#endregion
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AudioStreamPlayer.play() # Start playing the stream
 	playback = $AudioStreamPlayer.get_stream_playback() # Get its contents (empty)
-	fill_buffer()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-@warning_ignore("unused_parameter")
-func _process(delta):
-	fill_buffer() # Constantly fill the buffer
-
-
-# Called for every input event. 'event' contains event data
+	
+	#region Making and starting sound generation thread
+	thread1 = Thread.new()
+	thread1.start(_thread1)
+	#endregion
+	
 func _input(event):
 	if event is InputEventMouseMotion:
 		update_tone(event) # Update the generated tone
@@ -58,9 +57,16 @@ func update_tone(event):
 	# Remap the mouse y to 0 and max volume
 	amplitude = remap(mouse_y, 0, get_viewport().size.y, 5, 0) * mouse_pressed
 
-func fill_buffer():
-	var increment = frequency / sample_hz
 
+#region Thread1
+func _thread1():
+	# Stop if the game is trying to stop
+	while !stopping:
+		fill_buffer(amplitude, frequency)
+	
+func fill_buffer(amplitude, frequency):
+	var increment = frequency / sample_hz
+	
 	var to_fill = playback.get_frames_available() # Check how many samples of the buffer are empty
 	while to_fill > 0: # If there are samples empty, fill them
 		
@@ -69,3 +75,9 @@ func fill_buffer():
 		phase = fmod(phase + increment, 1.0)
 		
 		to_fill -= 1
+#endregion
+
+func _exit_tree():
+	# Wait for thread1 before quiting
+	stopping = true
+	thread1.wait_to_finish()
