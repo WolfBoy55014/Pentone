@@ -13,7 +13,7 @@ var string_length # Functions as 'string length' in frequency curve remap equati
 var playback: AudioStreamPlayback = null
 
 # Info about the mouse
-var mouse_pressure
+var mouse_pressure = 0.0
 var mouse_x
 var mouse_y
 
@@ -23,7 +23,6 @@ func _ready():
 	$AudioStreamPlayer.play() # Start playing the stream
 	playback = $AudioStreamPlayer.get_stream_playback() # Get its contents (empty)
 	fill_buffer()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
@@ -35,8 +34,9 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseMotion:
 		update_tone(event) # Update the generated tone
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit() # Stop game
+	if event is InputEventKey:
+		if event.is_action_pressed("ui_cancel"):
+			get_tree().quit() # Stop game
 
 func update_tone(event):
 	# Get mouse info
@@ -44,7 +44,7 @@ func update_tone(event):
 	mouse_x = event.position.x
 	mouse_y = event.position.y
 	
-	var mouse_pressed = ceili(mouse_pressure) # If pressure > 0, then 1
+	var mouse_pressed = 2 if mouse_pressure > 0 else -80 # If pressure > 0, then 1
 	
 	# Remap mouse x to virtual string length
 	string_length = remap(mouse_x, 0, get_viewport().size.x, 100, 21.0225)
@@ -56,15 +56,21 @@ func update_tone(event):
 	
 	# Remap the mouse y to 0 and max volume
 	amplitude = remap(mouse_y, 0, get_viewport().size.y, 5, 0) * mouse_pressed
+	
+	$AudioStreamPlayer.set_volume_db(amplitude)
+	$AudioStreamPlayer.set_pitch_scale(frequency / 100)
+	print(frequency)
+	print($AudioStreamPlayer.get_pitch_scale())
 
 func fill_buffer():
-	var increment = frequency / sample_hz
-
+	
+	
 	var to_fill = playback.get_frames_available() # Check how many samples of the buffer are empty
 	while to_fill > 0: # If there are samples empty, fill them
 		
+		var increment = 100 / sample_hz # Constant tone
 		# This generates a sine wave
-		playback.push_frame(Vector2.ONE * (amplitude * sin(phase * TAU))) # Audio frames are stereo.
+		playback.push_frame(Vector2.ONE * (sin(phase * TAU))) # Audio frames are stereo.
 		phase = fmod(phase + increment, 1.0)
 		
 		to_fill -= 1

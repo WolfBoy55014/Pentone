@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/fps.gd" id="3_60j6w"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_mi8uw"]
-buffer_length = 0.1
+buffer_length = 5.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_6guuw"]
 font = ExtResource("2_wnaxw")
@@ -20,7 +20,6 @@ script = ExtResource("1_0m6nh")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamGenerator_mi8uw")
-volume_db = 5.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 5.0
