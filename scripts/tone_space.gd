@@ -3,6 +3,7 @@ extends Node2D
 #region Variables
 var thread1
 var stopping
+var time_elapsed
 
 @onready var sample_hz = $AudioStreamPlayer.stream.mix_rate # Retrieve sample rate from AudioStreamPlayer node
 
@@ -31,6 +32,9 @@ func _ready():
 	thread1 = Thread.new()
 	thread1.start(_thread1)
 	#endregion
+
+func _process(delta):
+	$VBoxContainer/FPS.text = "SPuS: " + str(snapped(time_elapsed, 0.001))
 	
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -65,9 +69,11 @@ func _thread1():
 		fill_buffer(amplitude, frequency)
 	
 func fill_buffer(amplitude, frequency):
+	var start_time = Time.get_ticks_usec()
 	var increment = frequency / sample_hz
 	
 	var to_fill = playback.get_frames_available() # Check how many samples of the buffer are empty
+	var filled = float(to_fill)
 	while to_fill > 0: # If there are samples empty, fill them
 		
 		# This generates a sine wave
@@ -75,6 +81,8 @@ func fill_buffer(amplitude, frequency):
 		phase = fmod(phase + increment, 1.0)
 		
 		to_fill -= 1
+	
+	time_elapsed = ((Time.get_ticks_usec() - start_time) / filled) if filled > 0 else time_elapsed
 #endregion
 
 func _exit_tree():
