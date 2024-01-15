@@ -59,8 +59,6 @@ func update_tone(event):
 	
 	$AudioStreamPlayer.set_volume_db(amplitude)
 	$AudioStreamPlayer.set_pitch_scale(frequency / 100)
-	print(frequency)
-	print($AudioStreamPlayer.get_pitch_scale())
 
 func fill_buffer():
 	
