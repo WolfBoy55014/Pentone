@@ -57,7 +57,6 @@ func update_tone(event):
 	
 	# string_length integrated into Mersenne's Law for realistic frequency spacing
 	frequency = 27.5 * (800 / (2 * string_length))
-	
 	# Remap the mouse y to 0 and max volume
 	amplitude = remap(mouse_y, 0, get_viewport().size.y, 5, 0) * mouse_pressed
 
@@ -73,7 +72,7 @@ func fill_buffer(amplitude, frequency):
 	var increment = frequency / sample_hz
 	
 	var to_fill = playback.get_frames_available() # Check how many samples of the buffer are empty
-	var filled = float(to_fill)
+	var filled = to_fill
 	while to_fill > 0: # If there are samples empty, fill them
 		
 		# This generates a sine wave
@@ -82,7 +81,7 @@ func fill_buffer(amplitude, frequency):
 		
 		to_fill -= 1
 	
-	time_elapsed = ((Time.get_ticks_usec() - start_time) / filled) if filled > 0 else time_elapsed
+	time_elapsed = ((Time.get_ticks_usec() - start_time) / float(filled)) if filled > 0 else time_elapsed
 #endregion
 
 func _exit_tree():
