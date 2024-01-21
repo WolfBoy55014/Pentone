@@ -12,6 +12,7 @@ fill = 1
 [node name="Root" type="Node"]
 
 [node name="Tone Space" parent="." instance=ExtResource("1_8twiw")]
+z_index = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1

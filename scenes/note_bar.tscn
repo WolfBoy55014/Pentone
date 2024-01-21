@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ueghgjh3fp83"]
 
 [ext_resource type="FontFile" uid="uid://cn5jriityr7xy" path="res://fonts/Ubuntu/Ubuntu-Bold.ttf" id="1_7w1p7"]
-[ext_resource type="Script" path="res://scripts/note_bar.gd" id="1_52dho"]
+[ext_resource type="Script" path="res://scenes/note_bar.gd" id="1_la5ni"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_runpg"]
 font = ExtResource("1_7w1p7")
@@ -18,7 +18,7 @@ colors = PackedColorArray(0.815686, 0.529412, 0.439216, 1)
 gradient = SubResource("Gradient_mp3qp")
 
 [node name="Note Bar" type="Node2D"]
-script = ExtResource("1_52dho")
+script = ExtResource("1_la5ni")
 
 [node name="Label" type="Label" parent="."]
 z_index = 1
