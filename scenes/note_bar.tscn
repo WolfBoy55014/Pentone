@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://ueghgjh3fp83"]
+
+[ext_resource type="FontFile" uid="uid://cn5jriityr7xy" path="res://fonts/Ubuntu/Ubuntu-Bold.ttf" id="1_7w1p7"]
+[ext_resource type="Script" path="res://scenes/note_bar.gd" id="1_la5ni"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_runpg"]
+font = ExtResource("1_7w1p7")
+font_size = 20
+font_color = Color(0.921569, 0.796078, 0.545098, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4gygb"]
+
+[sub_resource type="Gradient" id="Gradient_mp3qp"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.815686, 0.529412, 0.439216, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7h2l7"]
+gradient = SubResource("Gradient_mp3qp")
+
+[node name="Note Bar" type="Node2D"]
+script = ExtResource("1_la5ni")
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_right = 16.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "A4"
+label_settings = SubResource("LabelSettings_runpg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(0, 12)
+rotation = 1.5708
+scale = Vector2(25, 25)
+mesh = SubResource("CapsuleMesh_4gygb")
+texture = SubResource("GradientTexture1D_7h2l7")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 1136)
+width = 6.0
+default_color = Color(0.815686, 0.529412, 0.439216, 1)
