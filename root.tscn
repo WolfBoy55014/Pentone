@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b8fsx4xh7pxjw" path="res://scenes/tone_space.tscn" id="1_8twiw"]
 
 [sub_resource type="Gradient" id="Gradient_lpy7x"]
-colors = PackedColorArray(0.639216, 0.745098, 0.54902, 1, 0.262745, 0.298039, 0.368627, 1)
+colors = PackedColorArray(0.180392, 0.203922, 0.25098, 1, 0.231373, 0.258824, 0.321569, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_n13vl"]
 gradient = SubResource("Gradient_lpy7x")

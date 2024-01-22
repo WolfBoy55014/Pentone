@@ -81,6 +81,8 @@ func remove_note_bars():
 			self.remove_child(c)
 			c.queue_free()
 
+#region Conversion Functions
+
 func string_length_2_frequency(string_length):
 	return 27.5 * (800 / (2 * string_length))
 
@@ -92,6 +94,7 @@ func x_2_string_length(x):
 
 func string_length_2_x(string_length):
 	return remap(string_length, 100, 21.0225, 0, get_viewport().size.x)
+#endregion
 
 #region Thread1
 func _thread1():
