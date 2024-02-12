@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bun2otu7ycbwh"]
+[gd_scene load_steps=7 format=3 uid="uid://ueghgjh3fp83"]
 
 [ext_resource type="FontFile" uid="uid://cn5jriityr7xy" path="res://fonts/Ubuntu/Ubuntu-Bold.ttf" id="1_7w1p7"]
 [ext_resource type="Script" path="res://scripts/note_bar.gd" id="1_52dho"]
@@ -12,7 +12,7 @@ font_color = Color(0.921569, 0.796078, 0.545098, 1)
 
 [sub_resource type="Gradient" id="Gradient_mp3qp"]
 offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.815686, 0.529412, 0.439216, 1)
+colors = PackedColorArray(0.298039, 0.337255, 0.415686, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7h2l7"]
 gradient = SubResource("Gradient_mp3qp")
@@ -21,7 +21,7 @@ gradient = SubResource("Gradient_mp3qp")
 script = ExtResource("1_52dho")
 
 [node name="Label" type="Label" parent="."]
-z_index = 1
+z_index = 2
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -38,6 +38,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+z_index = 1
 position = Vector2(0, 12)
 rotation = 1.5708
 scale = Vector2(25, 25)
@@ -47,4 +48,4 @@ texture = SubResource("GradientTexture1D_7h2l7")
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 1136)
 width = 6.0
-default_color = Color(1, 1, 1, 0.537255)
+default_color = Color(0.368627, 0.505882, 0.67451, 1)

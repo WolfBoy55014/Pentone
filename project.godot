@@ -13,7 +13,16 @@ config_version=5
 config/name="Pentone"
 run/main_scene="res://root.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
+run/low_processor_mode=true
 config/icon="res://icon.svg"
+
+[audio]
+
+driver/output_latency=5
+
+[display]
+
+window/vsync/vsync_mode=0
 
 [editor]
 
