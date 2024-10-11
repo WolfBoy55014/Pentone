@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=7 format=3 uid="uid://ueghgjh3fp83"]
+=======
+[gd_scene load_steps=7 format=3 uid="uid://b236rphyjsbe"]
+>>>>>>> Stashed changes
 
 [ext_resource type="FontFile" uid="uid://cn5jriityr7xy" path="res://fonts/Ubuntu/Ubuntu-Bold.ttf" id="1_7w1p7"]
 [ext_resource type="Script" path="res://scripts/note_bar.gd" id="1_52dho"]

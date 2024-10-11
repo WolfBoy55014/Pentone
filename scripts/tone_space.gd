@@ -49,6 +49,7 @@ func _window_resize():
 	populate_note_bars()
 
 func update_tone(event):
+	
 	# Get mouse info
 	mouse_pressure = event.pressure
 	mouse_x = event.position.x
@@ -65,7 +66,7 @@ func update_tone(event):
 	frequency = string_length_2_frequency(string_length)
 
 	# Remap the mouse y to 0 and max volume
-	amplitude = remap(mouse_y, 0, get_viewport().size.y, 5, 0) * mouse_pressed
+	amplitude = remap(mouse_y, 0, get_viewport().size.y, 1, 0) * mouse_pressed
 
 func populate_note_bars():
 	for note in notes_csv.records:
@@ -103,6 +104,9 @@ func _thread1():
 		fill_buffer(amplitude, frequency)
 
 func fill_buffer(amplitude, frequency):
+	if amplitude == 0:
+		return
+	
 	var increment = frequency / sample_hz
 
 	var to_fill = playback.get_frames_available() # Check how many samples of the buffer are empty
